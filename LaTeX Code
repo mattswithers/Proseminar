@@ -1,0 +1,391 @@
+\documentclass[openany, oneside]{book}
+\usepackage{grad_proseminar}
+\usepackage{booktabs}
+\usepackage{setspace} 
+\usepackage[page,titletoc,title]{appendix}
+\usepackage{setspace}
+\usepackage{fancyhdr}
+\usepackage{hyperref}
+\usepackage{amsthm}
+\usepackage{amssymb}
+\usepackage{amsmath}
+\usepackage{multirow}
+\usepackage{enumitem}
+\usepackage{graphicx}
+\usepackage{makecell}
+\usepackage{booktabs}
+\usepackage{pdfpages}
+\usepackage{graphicx}
+\usepackage{tikz}
+
+% These commands make the the \chapter command give CHAPTER X. Name of Chapter
+\usepackage{titlesec}
+\titleformat{\chapter}[block]{\bfseries\large\centering}{\MakeUppercase{\chaptertitlename} \thechapter. }{0pt}{}
+
+% These commands fix the header to avoid the extra text
+\pagestyle{myheadings}
+\leftmark{}
+\rightmark{}
+\usepackage{tocloft}
+
+% These commands set the correct numbering style for the section and subsection
+\renewcommand{\thesection}{\Alph{section}.}
+\renewcommand{\thesubsection}{\arabic{subsection}.}
+
+% These commands fix the table of contents to have the right spacing and put CHAPTER in the text
+\setlength{\cftchapnumwidth}{9em}
+\setlength{\cftsubsecnumwidth}{2em}
+\renewcommand{\cftchappresnum}{CHAPTER }
+\renewcommand{\cftchapaftersnum}{.}
+
+\newenvironment{blockquote}{%
+  \par%
+  \vskip1em
+  \leftskip=2em\rightskip=2em%
+  \noindent\ignorespaces}{%
+  \par\vskip1em}
+
+\newenvironment{blockquote2}{%
+	\par%
+	\vskip1em
+	\leftskip=4em\rightskip=4em%
+	\noindent\ignorespaces}{%
+  \par\vskip1em}
+
+\newenvironment{blockquote3}{%
+	\par%
+	\vskip1em
+	\leftskip=6em\rightskip=6em%
+	\noindent\ignorespaces}{%
+	\par\vskip1em}
+
+\title{Gun Control and Violent Crime: An Association Study}
+\author{Matthew Swithers \\ B.S. (Economics), University of Central Florida, 2010 \vskip1em}
+
+\advisor{Samantha Seals, PhD}
+
+\begin{document}
+
+\maketitle
+
+\begin{titlepage}
+
+\vspace*{1cm}
+
+\noindent
+The Proseminar of Matthew Swithers is approved:
+        
+\vspace{2cm}
+      
+\begin{tabular}{p{8cm}rrrrrrlrr}
+      	&       &       &       &       &       &       &       &       &  \\ \cmidrule{1-6}\cmidrule{8-10}
+     	Samantha Seals, PhD, Proseminar Advisor &       &       &       &       &       &       & Date  &       &  \\
+      	&       &       &       &       &       &       &       &       &  \\
+      	&       &       &       &       &       &       &       &       &  \\
+      	&       &       &       &       &       &       &       &       &  \\ \cmidrule{1-6}\cmidrule{8-10}
+	Josaphat Uvah, PhD, Committee Chair &       &       &       &       &       &       & Date  &       &  \\
+\end{tabular}
+
+\vspace*{2cm}
+
+\noindent
+Accepted for the Department:        
+
+\vspace{2cm}
+
+\begin{tabular}{p{8cm}rrrrrrlrr}
+	&       &       &       &       &       &       &       &       &  \\ \cmidrule{1-6}\cmidrule{8-10}
+	Jia Liu, PhD, Chair &       &       &       &       &       &       & Date  &       &  \\
+\end{tabular}
+
+\end{titlepage}
+
+%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+
+\frontmatter
+
+\tableofcontents 
+\newpage
+%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+
+\doublespace 
+
+\abstract
+
+\textbf{Objectives:} 
+	Using data from the Federal Bureau of Investigation, the United States Census Bureau, and the Brady Campaign Against Gun Violence, we examined the link between gun control levels and violent crime rates. Using both county and state-level data, we draw conclusions about the effectiveness of gun control legislation at reducing violent crime. In addition to general violent crime, we investigate if gun control reduces the rates of specific types of crime. In modeling, we evaluate income as a predictor for violent crime as compared to gun control, and if there is a significant difference in crime rates between metropolitan and non-metropolitan areas.
+\vskip8pt
+
+\noindent
+\textbf{Methods:} 
+    We are using the most recently available data (2015) from the FBI, Census Bureau, and the Brady Campaign. All variables are count data, modeled using negative binomial regression with a population offset. Results are interpreted using incidence rate ratios (IRR), the exponentiated values of the negative binomial regression.
+\vskip8pt
+
+\noindent
+\textbf{Results:} 
+	Brady score is a significant predictor of overall violent crime ($p<0.0001$) and individual crime rates (all $p<0.0011$), except for robbery ($p=0.2101$). Median income and Brady score are both significant predictors of violent crime ($p=1.9 \times 10^{-20}$ and $p=5.1 \times 10^{-7}$, respectively), but median income is a stronger predictor than Brady score. In metropolitan areas, only arson and robbery rates are significantly different than in non-metropolitan areas ($p=0.0016$ and $p<0.0001$, respectively).
+\vskip8pt
+	
+%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%	
+
+\mainmatter
+
+\newpage
+\chapter{INTRODUCTION}
+\section{Statement of Problem}
+In the United States, the debate surrounding gun control is a constant and polarizing topic among political figures. One extreme wants guns to be completely banned while the other extreme wants to see all gun regulations removed. Most citizens fall somewhere in between the two extremes. However, how effective is gun control at preventing violent crime? Are there other factors that are more important when considering the main drivers of crime rate? This research paper will attempt to add to the relevant literature by analyzing the following questions:\vskip1em
+How does the level of gun control affect the rates of violent crime?\vskip1em
+How does the level of gun control affect the rates of specific types of violent crime?\vskip1em
+Is median income a stronger predictor for violent crime than the level of gun control?\vskip1em
+Are violent crime rates different between metropolitan and non-metropolitan areas?
+
+\section{Relevance of Problem}
+Current political discussion on gun control suggests that the majority of citizens do believe that something needs to be done about gun crime. A recent Gallup poll suggests that as many as 67\% of people are in favor of more strict gun control laws, while only 28\% think things are fine the way they are now [6]. The questions this paper seeks to answer are relevant to the current political discussion on gun control and could help to shape public policy. After several large-scale mass shootings like the Vegas Massacre, the Pulse nightclub shooting, and multiple recent school shootings in the United States, it is critically important that the discussion be data-driven and logical. While we do not specifically discuss the phenomenon of mass shootings, the information presented may contribute to policy decisions in high-crime areas. 
+    
+\section{Literature Review}
+The previous literature on gun control does not reach a solid conclusion. In “Gun Availability and Violent Crime: New Evidence from the National Incident-Based Reporting System” [7], the authors sought to determine if legal or illegal gun ownership affected violent crime. As a stand-in for legal gun ownership, they used the number of concealed carry permit applications, and for illegal gun ownership they used the number of reported gun thefts. However, these measures of legal and illegal gun ownership are proxies and may not be reflective of the true ownership numbers within the population. The study used a two-way fixed effects model and found that legal gun ownership levels did not affect violent crime, while illegal gun ownership did. It is important to point out that while higher illegal gun ownership leads to higher violent crime, the paper was using data from only South Carolina. As discussed in this project, each state has different gun control laws. As such, South Carolina may not be a good representation of the United States.\vskip1em
+\noindent
+The paper “Does Gun Control Reduce Crime or Does Crime Increase Gun Control?” [8] used state-level data and a quantified level of gun control. The measure of gun control is an index created by the Open Society Institute’s Center on Crime, Communities and Culture. The index ranges from 0 to 100, depending on specific gun control laws in each state. This paper used linear regression, which is more suited for continuous data rather than the discrete count data resulting from measuring crime. This research suggested that higher gun control does not reduce violent crime within three years and that increased violent crime drives support for stricter gun control. \vskip1em
+\noindent
+In “The Effectiveness of Legislation Controlling Gun Usage: A Holistic Measure of Gun Control Legislation” [9], the researchers used state-level data and a quantified measure of gun control. Gun control was categorized through six categories: registration of firearms, safety training, regulation of firearm sales, safe storage and accessibility, owner licensing, and litigation and preemption. Each category was weighted from 0 to 7, depending on how strong the laws were in favor of strict gun control. This weighting process was performed by an anti-gun organization, which may imply that the weights were subject to an anti-gun bias. Multiple linear regression was used; as mentioned previously, this is appropriate for continuous data and not count data. The results of this research paper found that increasing gun control drastically reduced the number of gun deaths, however, did not test for an association with violent crime. Because general gun deaths could be anything from suicide, to legal self-defense, to murder, it is unclear how relevant their results are to the discussion on crime. 
+
+   
+%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+
+\chapter{MAIN BODY}
+
+%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+\section{Research Questions and Hypotheses}
+\noindent
+\textbf{Research Question 1:} How does the level of gun control affect the rates of violent crime? 
+\begin{blockquote}
+\textbf{Null Hypothesis:} Gun control level is not a predictor of violent crime rate.\\
+\textbf{Alternative Hypothesis:} Gun control level is a predictor of violent crime rate. 
+\end{blockquote}
+\noindent
+\textbf{Research Question 2:} How does the level of gun control affect the rates of specific types of violent crime?
+\begin{blockquote}
+\textbf{Null Hypothesis:} Gun control level is not a predictor of rates of specific types of violent crime.\\
+\textbf{Alternative Hypothesis:} Gun control level is a predictor of rates of specific types of violent crime.\\
+Types of violent crime studied: Murder, arson, aggravated assault, robbery, larceny, burglary, property crime, motor vehicle theft.
+\end{blockquote}
+\noindent
+\textbf{Research Question 3:} Is median income a stronger predictor of violent crime than the level of gun control?
+\begin{blockquote}
+\textbf{Null Hypothesis:} Median income is not a stronger independent predictor of violent crime than gun control level.\\
+\textbf{Alternative Hypothesis:} Median income is a stronger independent predictor of violent crime than gun control level.
+\end{blockquote}
+\noindent
+\textbf{Research Question 4:} Are violent crime rates different between metropolitan and non-metropolitan areas?
+\begin{blockquote}
+\textbf{Null Hypothesis:} Metropolitan area is not a predictor of any type of violent crime.\\
+\textbf{Alternative Hypothesis:} Metropolitan area is a predictor of some types of violent crime.
+\end{blockquote}
+
+%\newpage
+%\noindent
+
+%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+
+
+\section{Data Source}
+Data for the median income and population by county were downloaded from the United States Census Bureau website [3-4]. Metropolitan status, police information, and all other crime data came from the FBI website [1-2]. The Brady Score data came from the Brady Campaign state scorecard for 2015.\vskip1em
+\noindent
+All data is from the year 2015, as that was the most recent year for which data was available. The observations span across over 2000 counties in 44 states. Six states were excluded from the models due to a lack of available data: Alaska, Connecticut, Hawaii, Massachusetts, Delaware, and Rhode Island.
+
+\section{Variables}
+The general outcome of interest is violent crime. We also consider the various types of violent crime including, murder, arson, aggravated assault, robbery, larceny, burglary, property crime, and motor vehicle theft. All outcomes are count data corresponding to the number of that type of crime in each county.\vskip1em
+\noindent
+Predictors considered included Brady score (level of gun control), median income, racial majority (black, white, other), metropolitan area vs. non-metropolitan area, and number of police officers. We also considered state as a predictor, however multicollinearity existed between the state and its Brady score (VIF $>$ 10). We corrected this by removing state from the model.\vskip1em
+\noindent
+The variable used to measure the level of gun control, the Brady score, is a quantification of certain pieces of legislation that make up the gun laws of a state. These “scores” come from the Brady Campaign Against Gun Violence, a political action group that lobbies for increased gun legislation [5]. The overall score is the summation of positive or negative values that are assigned to specific laws, depending on whether those laws increase or decrease the total level of gun control in that state. Table 1 gives a brief overview this process.
+
+\begin{table}[h]
+\renewcommand{\thetable}{\arabic{table}}
+\caption{Brady score law overview}
+    \centering
+    \begin{tabular}{p{5em}rp{16.085em}rrrrr}
+    \toprule
+    \multicolumn{1}{c}{\textbf{Category}} &       & \multicolumn{1}{c}{\textbf{Subcategory}} &       & \multicolumn{4}{c}{\textbf{Points}} \\
+    \midrule
+    \multicolumn{1}{l}{\multirow{8}[8]{12em}{Keeping guns out of the hands of dangerous people}} &       & Background checks to stop dangerous people from buying guns &       &  &     & 25    &  \\
+\cmidrule{3-8}          &       & Other laws to stop dangerous people from buying and carrying guns &       &  &     & 12    &  \\
+\cmidrule{3-8}          &       & Laws to identify categories of people who are dangerous to themselves or others and should not have guns &       &   &    & 7     &  \\
+\cmidrule{3-8}          &       & Laws to secure guns from dangerous people &   &    &       & 6     &  \\
+    \midrule
+    \multicolumn{1}{l}{\multirow{4}[4]{12em}{Stopping the supply of crime guns}} &       & Laws and policies to stop bad apple gun dealers from supplying criminals with guns &       &   &    & 17    &  \\
+\cmidrule{3-8}          &       & Laws and policies to stop gun traffickers &   &    &       & 13    &  \\
+    \midrule
+    \multicolumn{1}{l}{\multirow{3}[2]{12em}{Making our national gun violence problem worse}} &       & Gun death rate &       &   &    & 10    &  \\ \cmidrule{3-8}
+          &       & Crime guns exported per 100,000 residents &    &   &       & 10    &  \\
+    \bottomrule
+    \end{tabular}
+\end{table}
+
+\noindent
+As an example, California has one of the highest Brady scores in the country at 76. This means that, in California, it is very difficult to legally purchase and store a firearm. California has a law which requires a background check for every gun sale, regardless of what type of firearm is sold, giving California +25 points. There is also a law in California that prevents anyone from purchasing a gun without a permit, worth +5 points. These laws have positive scores because they make it more difficult to purchase guns.\vskip1em
+\noindent For Florida, the overall score is -20.5, which indicates that there are very lax gun laws in Florida, or a low level of gun control. For instance, Florida has a law which allows residents of other states to order a Florida concealed carry permit by mail. This law has a score of -12 points for allowing people to carry weapons easier. Florida also has laws that prevent violent juvenile offenders, the severely mentally ill, and people with violent misdemeanors from purchasing firearms. Those laws have a total score of +3.\vskip1em
+
+\section{Statistical Methodology}
+The outcome of interest, number of violent crimes per county, is count data. When analyzing count data, either negative binomial regression or Poisson regression is needed. Poisson regression has an assumption that the variance and mean are equal. With this data, we saw that the mean was $81.17$ and the variance was $114163.67$, showing that the data is overdispersed, breaking the assumption of the Poisson. Instead, we apply the negative binomial distribution, which does not assume equal mean and variance. We also note that the negative binomial converges in distribution to the Poisson distribution as the dispersion parameter approaches zero. \vskip1em
+\noindent
+The negative binomial probability density function is defined as follows,
+\[ f(k)=\frac{\Gamma(k+r)}{k!\Gamma(r)}(1-p)^rp^k,\]
+\noindent where $k\in{0,1,2,3,...}$, $\Gamma(\cdot)$ is the gamma function, $k= $\ number of successes, $r= $\ number of failures until the experiment is stopped, and $p= $\ probability of success in each trial. \vskip1em
+
+\noindent
+In our model, we used an offset term in order to scale the data by population. When including the population offset, we ensure that resulting estimates are never larger than the original population size. Below is the model with the offset term. 
+\begin{align*}
+\log\left(\frac{\mu}{n}\right)&=\textbf{X}\pmb{\beta}, \\
+\log\left(\mu\right)-\log\left(n\right)&=\textbf{X}\pmb{\beta}, \\
+\log\left(\mu\right)&=\textbf{X}\pmb{\beta} + \log\left(n\right). 
+\end{align*}
+$k$ is our count variable, {\boldmath $\beta$} is the vector of the regression coefficients, and {\boldmath $X$} is the design matrix.
+We have defined statistical significance as having a p-value less than .05.\vskip1em
+
+\noindent
+\textbf{Interpreting Incidence Rate Ratios}\vskip1pt
+\noindent
+We note that when employing the negative binomial, we are modeling $\ln(\mu)$. In order to interpret the resulting $\beta$ estimates, we must first exponentiate them. This $\exp{\hat{\beta}_i}$ gives the incidence rate ratio (IRR) for predictor $i$. The incident rate ratio measures the factor of increase or decrease in the outcome due to a one unit increase in predictor $i$ The incidence rate ratio is a positive value, where a value between 0 and 1 indicates an inverse relationship, while a value over 1 indicates a positive relationship. Because we exponentiate $\hat{\beta_i}$, this factor is multiplicative rather than additive.
+
+
+\section{Software}
+All analyses and the majority of data management were performed in SAS Software, Version 9.4 (SAS Institute, Inc., Cary, NC). Some minor data management was done using Excel 2016. Creation of output tables was completed using Excel2LaTeX [10].
+
+%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+
+\section{Analysis Results}
+\textbf{Research Question 1:} How does the level of gun control affect the rates of violent crime?
+
+\begin{table}[h]
+\renewcommand{\thetable}{\arabic{table}}
+\caption{Violent Crime and Brady score}
+    \centering
+\begin{tabular}{  l  c  c  c  }
+\toprule
+	\multicolumn{1}{c}{\textbf{Parameter}} & \textbf{Level} & \textbf{IRR (95\% CI)} & \multicolumn{1}{c}{\textbf{p-value}} \\ \midrule
+	Median Income & & 0.973 (0.972, 0.973)  & $<0.0001$   \\ 
+	Metropolitan Area & & 1.163 (1.147, 1.179) & $<0.0001$   \\ 
+	Brady Score & & 0.957 (0.940, 0.973) & $<0.0001$   \\ 
+	Race Majority & B & 0.588 (0.564, 0.613) & $<0.0001$ \\ 
+	Race Majority & O & 0.334 (0.285, 0.391) & $<0.0001$ \\ 
+	Number of Police & & 1.340 (1.336, 1.343) & $<0.0001$   \\ \bottomrule
+\end{tabular}
+\end{table}
+\noindent
+Table 2 displays the results for modeling violent crime rates. We can see that the $p$-value for the Brady score (level of gun control) is statistically significant ($p<0.0001$). Although other variables were intended for model adjustment, all were statistically significant (all $p<0.0001$). IRR for the Brady score is $.9565$ which indicates an inverse relationship. The Brady score has been scaled by 10 to construct a more meaningful IRR. The IRR of .9565 indicates that for a 10 point increase in the Brady score, violent crime rates decrease by approximately 4\%. \vskip1em
+\newpage
+\noindent
+\textbf{Research Question 2:} How does the level of gun control affect the rates of specific types of violent crime?
+
+\begin{table}[h]
+\renewcommand{\thetable}{\arabic{table}}
+\caption{Specific types of crime and Brady score}
+    \centering
+\begin{tabular}{  l  c  r  }
+\toprule
+	\multicolumn{1}{c}{\textbf{Crime}} & \textbf{IRR (95\% CI)} & \textbf{p-value} \\ \midrule
+	Aggravated Assault & 0.953 (0.935, 0.970) & $<0.0001$ \\
+	Arson & 0.946 (0.921, 0.971) & $<0.0001$ \\ 
+	Burglary & 0.971 (0.954, 0.988) & $0.0011$ \\
+	Car Theft & 0.880 (0.862, 0.898) & $<0.0001$ \\
+	Larceny & 0.938 (0.922, 0.954) & $<0.0001$ \\ 
+	Murder & 0.943 (0.913, 0.973) & $0.0003$ \\
+	Property Crime & 0.945 (0.929, 0.961) & $<0.0001$ \\ 
+	Robbery & 0.984 (0.960, 1.009) & $0.2101$ \\ 
+	Violent Crime & 0.957 (0.940, 0.973) & $<0.0001$ \\ \bottomrule
+\end{tabular}
+\end{table}
+
+Table 3 shows the results for modeling rates of specific violent crimes. The same variables are used for model adjustment as in the previous model. The table shows that the Brady score is statistically significant for all types of violent crime (all $p<0.0011$) with the exception of robbery ($p=0.2101$). The IRR for every significant type of violent crime are less than 1 (all IRR$<0.960$), indicating an inverse relationship between the Brady score and each type of violent crime. The Brady score appears to have the largest effect on motor vehicle theft (IRR$=0.862$).\vskip1em
+\noindent
+\textbf{Research Question 3:} Is median income a stronger predictor for violent crime than the level of gun control?
+
+\begin{table}[h]
+\renewcommand{\thetable}{\arabic{table}}
+\caption{Median income and Brady score as predictor of violent crime}
+    \centering
+\begin{tabular}{  l  l  }
+\toprule
+	\multicolumn{1}{c}{\textbf{Parameter}} & \multicolumn{1}{c}{\textbf{p-value}} \\ \midrule
+	Median Income & 1.9001526679785112E-20 \\ 
+	Brady Score & 5.1006134920366957E-7 \\ \bottomrule
+\end{tabular}
+\end{table}
+
+Table 4 shows the $p$-values for Brady score and median income from the general violent crime model. Both of these variables have a $p$-value of less than $0.0001$, however if we view them in scientific notation, we can determine which variable is a stronger predictor. The table shows that median income has a $p$-value of $p=1.9 \times 10^{-20}$ while the Brady score has a $p$-value of $p=5.1 \times 10^{-7}$. Therefore, median income is a stronger predictor of violent crime than the Brady score.\vskip1em
+\noindent
+\textbf{Research Question 4:} Are violent crime rates different between metropolitan and non-metropolitan areas?
+
+\begin{table}[h]
+\renewcommand{\thetable}{\arabic{table}}
+\caption{Specific types of crime and metropolitan area}
+    \centering
+\begin{tabular}{  l  c  r  }
+\toprule
+	\multicolumn{1}{c}{\textbf{Crime}} & \textbf{IRR(95\% CI)} & \textbf{p-value} \\ \midrule
+	Aggravated Assault & 1.011 (0.903, 1.131) & $0.8526$ \\
+	Arson & 0.778 (0.666, 0.910) & $0.0016$ \\ 
+	Burglary & 1.028 (0.933, 1.132) & $0.5763$ \\ 
+	Car Theft & 1.019 (0.921, 1.127) & $0.7140$ \\
+	Larceny & 1.086 (0.984, 1.198) & $0.1006$ \\ 
+	Murder & 0.866 (0.714, 1.050) & $0.1432$ \\ 
+	Property Crime & 1.056 (0.960, 1.161) & $0.2607$ \\ 
+	Robbery & 1.666 (1.413, 1.965) & $<0.0001$ \\ 
+	Violent Crime & 1.022 (0.920, 1.135) & $0.6828$ \\ \bottomrule
+\end{tabular}
+\end{table}
+
+Table 5 shows the results of the metropolitan area analysis, adjusted using the same variables as the previous two models. We looked at overall violent crime as well as each type of specific violent crime. Only two types of violent crime are significant: arson and robbery ($p=0.0016$ and $p<0.0001$, respectively). The incidence rate ratio for arson shows that there are lower rates of arson in metropolitan areas (IRR$=0.778$). The IRR for robbery shows that there are higher rates of robbery in metropolitan areas (IRR$=1.666$).
+
+
+
+%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+
+\chapter{Conclusions}
+
+\section{Summary of Key Findings}
+Gun control level (Brady score) is a significant predictor of violent crime rates. Brady score is also a significant predictor of individual types of crime, excluding robbery. All types of crime for which the Brady score is a significant predictor have an IRR less than 1, indicating that as gun control laws increase, the violent crime rates decrease.\vskip1em
+\noindent
+While median income and gun control level are both significant predictors of violent crime rates, median income is a stronger predictor than gun control level; economic factors may need to be considered when making anti-crime policy, rather than gun control laws.\vskip1em
+\noindent
+In metropolitan areas we expect lower rates of arson and higher rates of robbery. Rates of other violent crimes are not significantly different between metropolitan and non-metropolitan areas.
+\section{Limitations of Study}
+This study has several limitations. First, the use of any quantification of gun control could be heavily biased by the organization that creates the scores. The Brady Campaign is an anti-gun political action group, so the score may be biased towards anti-gun laws.\vskip1em
+\noindent
+We also note that there are other important variables that should be considered when predicting violent crime, not captured in these models. These variables could include things like gun ownership rates, median education level, median age, etc. 
+\section{Suggestions for Further Study}
+In further studies, it would be important to include other variables that we were unable to collect, such as gun ownership rates in each county, median education level, and median age. It may also be worthwhile to use each type of gun control law as predictors, giving a better understanding of which laws may prevent crime and which laws may not. This analysis should be updated with more recent data as it becomes available. Given the recent increase in gun violence, it will be interesting to see longitudinal effects of gun control laws: will stricter laws decrease gun violence over time?
+
+
+% Below is the bibliography
+\begin{thebibliography}{}
+\item[1] (2016, September 1). Retrieved from \href{https://ucr.fbi.gov/crime-in-the-u.s/2011/crime-in-the-u.s.-2011/tables/table-80/view}{https://ucr.fbi.gov/crime-in-the-u.s/2011/crime-in-the-u.s.-2011/tables/table-80/view}\vskip1em
+\item[2] \textit{Crime in the United States.} Retrieved from \href{https://ucr.fbi.gov/crime-in-the-u.s/2015/crime-in-the-u.s.-2015/tables/table-10/table\_10\_offenses\_known\_to\_law\_enforcement\_by\_state\_by\_metropolitan\_and\_nonmetropolitan\_counties\_2015.xls/view}{https://ucr.fbi.gov/crime-in-the-u.s/2015/crime-in-the-u.s.-2015/tables/table-10/table\_10\_offenses\_known\_to\_law\_enforcement\_by\_state\_by\_metropolitan\_and\_\\nonmetropolitan\_counties\_2015.xls/view}\vskip1em
+\item[3] (2016, September 1). Retrieved from \href{https://www2.census.gov/programs-surveys/popest/datasets/2010-2015/counties/asrh/}{https://www2.census.gov/programs-surveys/popest/datasets/2010-2015/counties/asrh/}\vskip1em
+\item[4] Retrieved from \href{https://factfinder.census.gov/faces/tableservices/jsf/pages/productview.xhtml?pid=ACS_15_1YR_GCT1901.US05PR&prodType=table}{https://factfinder.census.gov/faces/tableservices/jsf/pages/productview.xhtml?pid=\\ACS\_15\_1YR\_GCT1901.US05PR\&prodType=table}\vskip1em
+\item[5] (2015, March). \textit{The Brady Campaign State Scorecard.} Retrieved from \href{http://www.bradycampaign.org/scorecard-2015/crimadvisor/data/Brady-State-Scorecard-2014.pdf}{http://www.bradycampaign.org/scorecard-2015/crimadvisor/data/Brady-State-Scorecard-2014.pdf}\vskip1em
+\item[6] (2018, March). \textit{Guns.} Retrieved from \href{https://news.gallup.com/poll/1645/guns.aspx}{https://news.gallup.com/poll/1645/guns.aspx}\vskip1em
+\item[7] Stolzenberg, L. and J. D'Alessio, Stewart. (2000). Gun Availability and Violent Crime: New Evidence from the National Incident-Based Reporting System. Social Forces. 74. 1461. 10.1093/sf/78.4.1461.\vskip1em
+\item[8] Moorhouse, J. C. and Wanner, B. (2006). Does Gun Control Reduce Crime or Does Crime Increase Gun Control? Cato Journal, Vol. 21 No. 1 (Winter 2006) \vskip1em
+\item[9] Kwon, I. G. and Baack, D. W. (2005), The Effectiveness of Legislation Controlling Gun Usage. American Journal of Economics and Sociology, 64: 533-547. doi:10.1111/j.1536-7150.2005.00378.x
+\item[10] Wood, E. (2012). Retrieved from \href{http://excel2latex.com/}{http://excel2latex.com/}
+
+\end{thebibliography}
+
+
+\
+
+
+
+
+
+
+
+
+
+
+
+
+
+\end{document}
