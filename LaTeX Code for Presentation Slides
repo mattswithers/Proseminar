@@ -1,0 +1,326 @@
+\documentclass[xcolor=dvipsnames]{beamer}
+\usetheme{Warsaw}
+
+\setbeamercolor*{palette primary}{use=structure,fg=white,bg=green!50!black}
+\setbeamercolor*{palette quaternary}{fg=white,bg=blue!60!black}
+\setbeamercolor{frametitle}{fg=white,bg=blue!60!black}
+
+\usepackage{beamerthemesplit}
+\usepackage{amsmath}
+\usepackage{amsfonts}
+\usepackage{graphicx}
+\usepackage{multirow} 
+\usepackage{setspace}
+\usepackage{hyperref}
+\usepackage{booktabs}
+
+\righthyphenmin 62
+\lefthyphenmin 62
+
+\newenvironment{blockquote}{%
+  \par%
+  \vskip1em\leftskip=1em\rightskip=1em%
+  \noindent\ignorespaces}{%
+  \par\vskip1em}
+  
+  \newenvironment{blockquote2}{%
+  \par%
+  \vskip1em\leftskip=2em\rightskip=2em%
+  \noindent\ignorespaces}{%
+  \par\vskip1em}
+
+% information for title page and footer of slides
+\title[University of West Florida \hspace{12em} \insertframenumber/\inserttotalframenumber]{Gun Control and Violent Crime: an Associative Study}
+\author[Matthew Swithers]{Matthew Swithers}
+\date{July 27, 2018}
+
+\begin{document}
+
+% remove navigation buttons
+\beamertemplatenavigationsymbolsempty
+
+% title page
+\frame
+{
+\titlepage
+}
+
+\frame
+{
+\frametitle{Outline}
+\begin{enumerate}
+\item[1.] Previous Studies\vskip20pt
+\item[2.] Study Goals\vskip20pt
+\item[3.] Data\vskip20pt
+\item[4.] Type of Analysis\vskip20pt
+\item[5.] Analysis Results\vskip20pt
+\item[6.] Conclusions
+\end{enumerate}
+}
+
+\frame
+{
+\frametitle{Previous Studies}
+\textit{Gun Availability and Violent Crime:
+New Evidence from the National
+Incident-Based Reporting System}\vskip1em
+Lisa Stolzenberg, Stewart J. D'Alessio
+\begin{blockquote}    
+    Studied the relationship between gun ownership and violent crime.
+    \begin{blockquote2}
+    Two-way fixed-effects model (ANOVA). 
+    \end{blockquote2}
+    Results: 
+    \begin{blockquote2}
+    Legal gun ownership did not affect violent crime rates.
+    Illegal gun ownership increased violent crime rates.
+    \end{blockquote2}
+\end{blockquote}
+}
+
+\frame
+{
+\frametitle{Previous Studies}
+\textit{Does Gun Control Reduce Crime or
+Does Crime Increase Gun Control?}\vskip1em
+John C. Moorhouse, Brent Wanner
+\begin{blockquote}    
+    Used state-level data and a quantified level of gun control.\vskip1em
+    Analyzed different types of violent crimes using linear regression.\vskip1em
+    Results:
+    \begin{blockquote2}
+    Gun control does not reduce violent crime within 3 years.
+    Violent crime drives support for gun control laws.
+    \end{blockquote2}
+\end{blockquote}
+}
+
+\frame
+{
+\frametitle{Previous Studies}
+\textit{The Effectiveness of Legislation Controlling
+Gun Usage: A Holistic Measure of Gun Control Legislation.}\vskip1em
+Ik‐Whan G. Kwon, Daniel W. Baack
+\begin{blockquote}
+    Used state-level data and a quantified level of gun control.\vskip1em
+    Analyzed using multiple linear regression.\vskip1em
+    Results:
+    \begin{blockquote2}
+    Gun control drastically reduces the number of gun deaths in a state.
+    Did not find a meaningful link between gun control and violent crime.
+    \end{blockquote2}
+\end{blockquote}
+}
+
+\frame
+{
+\frametitle{Study Goals}
+What affect does the level of gun control have on the amount of violent crime?
+\begin{blockquote}
+How does the level of gun control affect specific types of violent crime?
+\end{blockquote}
+Is median income a stronger predictor for violent crime than the level of gun control?\vskip1em
+Is violent crime different between metropolitan and non-metropolitan areas?
+
+}
+
+\frame
+{
+\frametitle{Data}
+The Brady State Score\vskip1em
+\begin{blockquote}    
+    Quantified measure of gun control level.\vskip1em
+    Based on specific state gun control laws.\vskip1em
+    Higher scores indicate more strict gun control laws.\vskip1em
+    Scores are assigned by the Brady Campaign Against Gun Violence.
+\end{blockquote}
+}
+
+\frame
+{
+\frametitle{Data}
+The Brady State Score\vskip1em
+\begin{blockquote}    
+    Example:\vskip1em
+    \begin{itemize}
+    \item California state score: 76
+    \item Florida state score: -20.5
+    \end{itemize}
+\end{blockquote}
+}
+
+\frame
+{
+\frametitle{Data}
+Dependent Variables\vskip1em
+\begin{blockquote}    
+    Number of overall violent crimes by county.
+    \begin{blockquote2}
+    Offset by population.
+    \end{blockquote2}
+    County level violent crime broken down by type of crime:
+    \begin{itemize}
+    \item Murder.
+    \item Arson.
+    \item Aggravated assault.
+    \item Robbery.
+    \item Larceny.
+    \item Burglary.
+    \item Property crime.
+    \item Motor vehicle theft.
+    \end{itemize}
+\end{blockquote}
+}
+
+\frame
+{
+\frametitle{Data}
+Independent Variables\vskip1em
+\begin{blockquote}
+    Brady Campaign State Score.\vskip1em
+    Median income by county.\vskip1em
+    Racial majority by county (white, black, other).\vskip1em
+    Metropolitan and non-metropolitan county binary variable.\vskip1em
+    Number of police officers per county.
+\end{blockquote}
+}
+
+\frame
+{
+\frametitle{Type of Analysis}
+Negative Binomial Regression\vskip1em
+\begin{blockquote}
+    To model per-capita crime rates, used negative binomial regression.
+    \begin{blockquote2}
+    Offset term of ln(n), where n is county population.
+    \end{blockquote2}
+    Negative binomial regression was used over Poisson regression due to overdispersion.
+\end{blockquote}
+}
+
+\frame
+{
+\frametitle{Type of Analysis}
+Negative Binomial Model\vskip1em
+\begin{blockquote}
+$f(k)=\frac{\Gamma(k+r)}{k!\Gamma(r)}\cdot(1-p)^rp^k$ \hfill $k\in{0,1,2,3,...}$\vskip1em
+\end{blockquote}
+Regression Model With Offset Term
+\begin{align*}
+\log\left(\frac{\mu}{n}\right)&=\textbf{X}\pmb{\beta} \\
+\log\left(\mu\right)-\log\left(n\right)&=\textbf{X}\pmb{\beta} \\
+\log\left(\mu\right)&=\textbf{X}\pmb{\beta} + \log\left(n\right) \\
+\end{align*}
+}
+
+\frame
+{
+\frametitle{Type of Analysis}
+Incidence Rate Ratio\vskip1em
+\begin{blockquote}
+Measures the factor of increase or decrease in the incidence of the dependent variable caused by a one-unit increase in an independent variable.\vskip1em
+Example: Incidence rate ratio of 1.3 for X shows that Y will change by a factor of 1.3 for a one-unit increase in X.
+\end{blockquote}
+}
+
+\frame
+{
+\frametitle{Analysis Results}
+First Model: Violent Crime\vskip1em
+\begin{tabular}{ | l | l | l | l | }
+\hline
+	\textbf{Parameter} & \textbf{Level} & \textbf{IRR (95\% CI)} & \textbf{p-value} \\ \hline
+	Median Income & & 0.973 (0.972, 0.973)  & $<0.0001$ \  \\ \hline
+	Metropolitan Area & & 1.163 (1.147, 1.179) & $<0.0001$  \  \\ \hline
+	Brady Score & & 0.957 (0.940, 0.973) & $<0.0001$  \  \\ \hline
+	Race Majority & B & 0.588 (0.564, 0.613) & $<0.0001$ \\ \hline
+	Race Majority & O & 0.334 (0.285, 0.391) & $<0.0001$ \\ \hline
+	Number of Police & & 1.340 (1.336, 1.343) & $<0.0001$  \  \\ \hline
+\end{tabular}
+}
+
+\frame
+{
+\frametitle{Analysis Results}
+Specific crimes\vskip1em
+\begin{blockquote}
+\begin{tabular}{ | l | l | r | }
+\hline
+	\textbf{Crime} & \textbf{IRR (95\% CI)} & \textbf{p-value} \\ \hline
+	Aggravated Assault & 0.953 (0.935, 0.970) & $<0.0001$ \\ \hline
+	Arson & 0.946 (0.921, 0.971) & $<0.0001$ \\ \hline
+	Burglary & 0.971 (0.954, 0.988) & $0.0011$ \\ \hline
+	Car Theft & 0.880 (0.862, 0.898) & $<0.0001$ \\ \hline
+	Larceny & 0.938 (0.922, 0.954) & $<0.0001$ \\ \hline
+	Murder & 0.943 (0.913, 0.973) & $0.0003$ \\ \hline
+	Property Crime & 0.945 (0.929, 0.961) & $<0.0001$ \\ \hline
+	Robbery & 0.984 (0.960, 1.009) & $0.2101$ \\ \hline
+	Violent Crime & 0.957 (0.940, 0.973) & $<0.0001$ \\ \hline
+\end{tabular}
+\end{blockquote}
+}
+
+
+\frame
+{
+\frametitle{Analysis Results}
+Income vs. Brady\vskip1em
+\begin{center}
+\begin{tabular}{ | l | l | }
+\hline
+	\textbf{Parameter} & \textbf{p-value} \\ \hline
+	Median Income & 1.9001526679785112E-20 \\ \hline
+	Brady Score & 5.1006134920366957E-7 \\ \hline
+\end{tabular}
+\end{center}
+\begin{blockquote}
+Median income has a much lower p-value, indicating that median income is a stronger predictor of violent crime.
+\end{blockquote}
+}
+
+\frame
+{
+\frametitle{Analysis Results}
+Metropolitan vs Non-metropolitan\vskip1em
+\begin{tabular}{ | l | l | r | }
+\hline
+	\textbf{Crime} & \textbf{IRR(95\% CI)} & \textbf{p-value} \\ \hline
+	Aggravated Assault & 1.011 (0.903, 1.131) & $0.8526$ \\ \hline
+	Arson & 0.778 (0.666, 0.91) & $0.0016$ \\ \hline
+	Burglary & 1.028 (0.933, 1.132) & $0.5763$ \\ \hline
+	Car Theft & 1.019 (0.921, 1.127) & $0.7140$ \\ \hline
+	Larceny & 1.086 (0.984, 1.198) & $0.1006$ \\ \hline
+	Murder & 0.866 (0.714, 1.05) & $0.1432$ \\ \hline
+	Property Crime & 1.056 (0.96, 1.161) & $0.2607$ \\ \hline
+	Robbery & 1.666 (1.413, 1.965) & $<0.0001$ \\ \hline
+	Violent Crime & 1.022 (0.92, 1.135) & $0.6828$ \\ \hline
+\end{tabular}
+}
+
+\frame
+{
+\frametitle{Conclusion}
+Increasing the level of gun control does correlate with statistically lower violent crime rates, but not by a very large amount.\vskip1em
+All crimes except robbery are lower with higher levels of gun control.\vskip1em
+Only auto theft might be lower by a significant amount, all other crimes show insignificant changes.\vskip1em
+}
+
+\frame
+{
+\frametitle{Analysis Results}
+Median income has a lower p-value than Brady score, so it is a better predictor of violent crime.\vskip1em
+P-value for arson and robbery are significant, but no other crime.\vskip1em
+Incidence rate ratio for arson indicates significantly lower rates for metropolitan areas.\vskip1em
+Robbery is drastically increased in metropolitan areas.
+}
+
+\frame
+{
+\frametitle{Thank you!}
+\begin{center}
+    Thank you for your time.\vskip1em
+    Any questions?
+\end{center}
+}
+
+\end{document}
